@@ -1,0 +1,78 @@
+<!-- Validation failure messages -->
+<% if @listing.errors.any? %>
+  <% @listing.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Listing</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_listing" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <!-- Label and input for city -->
+      <div class="form-group">
+        <label for="city" class="control-label">
+          City
+        </label>
+
+        <input type="text" id="city" name="city" placeholder="City" class="form-control" value="<%= @listing.city %>">
+      </div>
+
+      <!-- Label and input for address -->
+      <div class="form-group">
+        <label for="address" class="control-label">
+          Address
+        </label>
+
+        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%= @listing.address %>">
+      </div>
+
+      <!-- Label and input for rent_dates -->
+      <div class="form-group">
+        <label for="rent_dates" class="control-label">
+          Rent dates
+        </label>
+
+        <input type="text" id="rent_dates" name="rent_dates" placeholder="Rent dates" class="form-control" value="<%= @listing.rent_dates %>">
+      </div>
+
+      <!-- Label and input for rent_amount -->
+      <div class="form-group">
+        <label for="rent_amount" class="control-label">
+          Rent amount
+        </label>
+
+        <input type="text" id="rent_amount" name="rent_amount" placeholder="Rent amount" class="form-control" value="<%= @listing.rent_amount %>">
+      </div>
+
+      <!-- Label and input for details -->
+      <div class="form-group">
+        <label for="details" class="control-label">
+          Details
+        </label>
+
+        <textarea id="details" name="details" placeholder="Details" class="form-control" rows="3"><%= @listing.details %></textarea>
+      </div>
+
+      <button class="btn btn-success">
+        Create Listing
+      </button>
+      or
+      <a href="/listings">Cancel</a>
+    </form>
+  </div>
+</div>
